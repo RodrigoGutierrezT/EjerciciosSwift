@@ -105,6 +105,22 @@ print("La letra \(character) aparece \(cuenta) veces en el texto.")
 /// Texto sin duplicados: programción
 /// ```
 
+func removeDuplicates(fromString text: String) -> String {
+    var resultChars: [String] = []
+    for char in text {
+        let strChar = String(char)
+        
+        if !resultChars.contains(strChar) {
+            resultChars.append(strChar)
+        }
+    }
+    
+    return resultChars.joined(separator: "")
+}
+
+let texto2 = "programación"
+let textoSinDuplicados = removeDuplicates(fromString: texto2)
+print("Texto sin duplicados: \(textoSinDuplicados)")
 
 // MARK: - Exercise 3: condense whitespace
 /// Elimina los caracteres en blanco repetidos de una cadena, manteniendo únicamente un único espacio entre palabras: condense
@@ -132,6 +148,18 @@ print("La letra \(character) aparece \(cuenta) veces en el texto.")
 /// 'Hola Swift Developers'
 /// ```
 
+func condense(_ str: String) -> String {
+    let trimmed = str.trimmingCharacters(in: .whitespacesAndNewlines)
+    
+    // Usando expresión regular para que sea más facil identificar multiples espacios entre caracteres
+    let condensed = trimmed.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+    
+    return condensed
+}
+
+let texto3 = "   Hola    Swift   Developers   "
+let textoCondensado = condense(texto3)
+print("'\(textoCondensado)'")
 
 
 // MARK: - Exercise 4: classify
@@ -158,3 +186,20 @@ print("La letra \(character) aparece \(cuenta) veces en el texto.")
 /// ```
 /// Vocales: 6, Consonantes: 9
 /// ```
+
+func classify(_ str: String) -> (vowels: Int, consonants: Int) {
+    var vowelCount = 0
+    var consonantCount = 0
+    
+    for char in str.lowercased() {
+        guard char.isLetter else { continue }
+        
+        if "aeiou".contains(char) {
+            vowelCount += 1
+        } else {
+            consonantCount += 1
+        }
+    }
+    
+    return (vowelCount, consonantCount)
+}

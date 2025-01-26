@@ -114,7 +114,5 @@ struct GameController {
             }
         }
     }
-
-    
 }
 
